@@ -1,0 +1,26 @@
+Interface to the C implementation of Ryu at:
+https://github.com/ulfjack/ryu/tree/master/ryu.
+
+At the moment this implementation cover only single and double
+precision C data types.
+Therefore, it's not currently usable with perl builds whose
+$Config{nvsize} > 8.
+
+Building Math::Ryu also requires that the __uint128_t data type
+is available. (IME, this rules out 32-bit builds.)
+
+1) Clone the repository:
+   $ git clone https://github.com/ulfjack/ryu.git /home/me/ryu
+
+2) cd to /home/me/ryu and run:
+   i)   make
+   ii)  make test
+   iii) make PREFIX=/home/me/libraries/ryu install
+   iv)  make clean (optional)
+
+If /home/me/libraries/ryu/include is searched for header files by default
+&& /home/me/libraries/ryu/lib is searched for library files by default
+then you can install Math::Ryu by running:
+
+$ cpan -i Math::Ryu
+
