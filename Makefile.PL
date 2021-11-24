@@ -8,17 +8,24 @@ if($Config::Config{nvsize} > 8) {
 
   exit 0;
 }
-my %options = %{
-{
-  'NAME' => 'Math::Ryu',
-  'LIBS' => [
-             '-lryu'
-             ],
-  'PREREQ_PM'    => { 'Test::More' => '0.88', },
-  'LICENSE'      => 'perl',
-  'VERSION_FROM' => 'Ryu.pm',
-}
-};
+my %options = (
+
+  NAME => 'Math::Ryu',
+  LIBS => ['-lryu'],
+  PREREQ_PM    => { 'Test::More' => '0.88', },
+  LICENSE      => 'perl',
+  VERSION_FROM => 'Ryu.pm',
+  META_MERGE   => {
+    'meta-spec'  => { version => 2 },
+    resources    => {
+      repository   => {
+        type         => 'git',
+        url          => 'https://github.com/sisyphus/math-ryu.git',
+        web          => 'https://github.com/sisyphus/math-ryu',
+      },
+    },
+  },
+);
 WriteMakefile(%options);
 
 # Remove the Makefile dependency. Causes problems on a few systems.
