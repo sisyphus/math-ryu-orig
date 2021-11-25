@@ -11,7 +11,7 @@
 #include "perl.h"
 #include "XSUB.h"
 
-#include <ryu.h>
+#include "ryu/ryu.h"
 
 #define D_BUF    32
 #define LD_BUF   40
