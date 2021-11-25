@@ -46,6 +46,9 @@ my @exp = (
 
 for(0 .. @in - 1) {
 
+  # I know of cases where 2 ** -1074 is incorrectly deemed to be zero.
+  next if $in[$_] == 0;
+
 ###########
 
 ## d2s() ##
