@@ -6,16 +6,13 @@ Math::Ryu - perl interface to the ryu C library.
 
 =head1 DEPENDENCIES
 
-   This module needs the ryu C library, which is available from github:
+   This module includes the Ryu C library, which is available from github:
    $ git clone https://github.com/ulfjack/ryu.git /home/me/ryu_source
-
-   The compilable source is then found in /home/me/ryu_source/ryu.
-
 
 =head1 DESCRIPTION
 
-   Convert a double to a decimal string, such that no information is
-   lost && the string is no longer than it needs to be.
+   Convert an NV to a decimal string, such that no information is
+   lost, yet keeping the string as short as possible.
 
    NOTE:
    NVs whose size is greater than 8 bytes are not currently catered for.
@@ -36,15 +33,16 @@ Math::Ryu - perl interface to the ryu C library.
 =head1 FUNCTIONS
 
    $str = d2s($nv);
-    $str is in floating point format.
-    $str, when correctly assigned to a perl scalar, will always be
-    equivalent to $nv.
-    Also, $str will contain as few digits as possible, without
-    compromising that accuracy.
+    $nv holds a floating point numeric value.
+    $str is a string in floating point format, that accurately
+    and succinctly represents the value held by $nv.
+    $str, when correctly assigned back to a perl number, will
+    always be equivalent to $nv.
     This in stark contrast to perl's interpolation which does not
     guarantee that the condition ("$nv" == $nv) is true, even for
-    non-nan values of $nv.
-
+    non-nan values of $nv. (Eg if $nv is sqrt 2.0 or 1.4/10 .)
+    Also, $str will contain as few digits as possible, without
+    compromising that accuracy.
 
    $str = d2fixed($nv, $digits);
     $str is a $digits-decimal fixed point representation of $nv.
