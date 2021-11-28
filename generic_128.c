@@ -19,9 +19,10 @@
 // -DRYU_DEBUG Generate verbose debugging output to stdout.
 
 /* Sisyphus has applied some superficial changes to this file because perl has *
- * not always assumed "C99 mode"  */
+ * not always honored "C99 mode". The location of the headers, relative to
+ * this file has also been changed */
 
-#include "ryu/ryu_generic_128.h"
+#include "ryu_headers/ryu_generic_128.h"
 
 #include <assert.h>
 #include <stdbool.h>
@@ -29,7 +30,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "ryu/generic_128.h"
+#include "ryu_headers/generic_128.h"
 
 #ifdef RYU_DEBUG
 #include <inttypes.h>
