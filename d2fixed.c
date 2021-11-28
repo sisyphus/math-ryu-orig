@@ -24,9 +24,10 @@
 // -DRYU_AVOID_UINT128 Avoid using uint128_t. Slower, depending on your compiler.
 
 /* Sisyphus has applied some superficial changes to this file because perl has *
- * not always assumed "C99 mode"  */
+ * not always honored "C99 mode". The location of the header files, relative   *
+ * to the location of this file, has also changed                              */
 
-#include "ryu/ryu.h"
+#include "ryu_headers/ryu.h"
 
 #include <assert.h>
 #include <stdbool.h>
@@ -39,10 +40,10 @@
 #include <stdio.h>
 #endif
 
-#include "ryu/common.h"
-#include "ryu/digit_table.h"
-#include "ryu/d2fixed_full_table.h"
-#include "ryu/d2s_intrinsics.h"
+#include "ryu_headers/common.h"
+#include "ryu_headers/digit_table.h"
+#include "ryu_headers/d2fixed_full_table.h"
+#include "ryu_headers/d2s_intrinsics.h"
 
 #define DOUBLE_MANTISSA_BITS 52
 #define DOUBLE_EXPONENT_BITS 11
