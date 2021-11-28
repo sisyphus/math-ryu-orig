@@ -15,7 +15,10 @@
 // is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied.
 
-#include "ryu/ryu_parse.h"
+ /* The location of the headers, relative to this file, has been changed by
+  * Sisyphus */
+
+#include "ryu_headers/ryu_parse.h"
 
 #include <assert.h>
 #include <stdbool.h>
@@ -28,13 +31,13 @@
 #include <stdio.h>
 #endif
 
-#include "ryu/common.h"
-#include "ryu/d2s_intrinsics.h"
+#include "ryu_headers/common.h"
+#include "ryu_headers/d2s_intrinsics.h"
 
 #if defined(RYU_OPTIMIZE_SIZE)
-#include "ryu/d2s_small_table.h"
+#include "ryu_headers/d2s_small_table.h"
 #else
-#include "ryu/d2s_full_table.h"
+#include "ryu_headers/d2s_full_table.h"
 #endif
 
 #define DOUBLE_MANTISSA_BITS 52
