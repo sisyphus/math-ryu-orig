@@ -1,8 +1,32 @@
 MANIFEST
 Changes
+have_uint128_t.in
 Makefile.PL
 Ryu.pm
 Ryu.pod
 Ryu.xs
 README
 t/_1basic.t
+t/mpfr_checks.t
+
+# The following are all ryu source files
+# from https://github.com/ulfjack/ryu/tree/master/ryu.
+# The files d2fixed.c, generic_128.c and ryu/generic_128.h
+# have received some superficial modifications because
+# some perl builds do not honor the permissiveness of "C99 mode".
+
+d2fixed.c
+d2s.c
+generic_128.c
+s2d.c
+ryu/common.h
+ryu/d2fixed_full_table.h
+ryu/d2s_full_table.h
+ryu/d2s_intrinsics.h
+ryu/d2s_small_table.h
+ryu/digit_table.h
+ryu/generic_128.h
+ryu/ryu.h
+ryu/ryu_generic_128.h
+ryu/ryu_parse.h
+
