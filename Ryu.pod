@@ -74,6 +74,10 @@ Math::Ryu - perl interface to the ryu C library.
     $str is the same as returned by d2exp($nv, $digits).
     $len is length($str).
 
+=head1 TODO
+
+    Cover larger precision NV types (ie long double and __float128)
+
 =head1 LICENSE
 
     This program is free software; you may redistribute it and/or
