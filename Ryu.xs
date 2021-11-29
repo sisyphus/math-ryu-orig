@@ -12,10 +12,7 @@
 #include "XSUB.h"
 
 #include "ryu_headers/ryu.h"
-
-#define D_BUF    32
-#define LD_BUF   40
-#define F128_BUF 48
+#include "math_ryu_include.h"
 
 /* d2s */
 
@@ -27,7 +24,7 @@ void RYU_d2s_buffered_n(pTHX_ SV * nv) {
   Newxz(result, D_BUF, char);
 
   n = d2s_buffered_n(SvNV(nv), result);
-  ST(0) = sv_2mortal(newSVpv(result, 0));
+  ST(0) = MORTALIZED_PV(result);        /* defined in math_ryu_include.h */
   ST(1) = sv_2mortal(newSViv(n));
 
   Safefree(result);
@@ -63,7 +60,7 @@ void RYU_d2fixed_buffered_n(pTHX_ SV * nv, SV * prec) {
 
   n = d2fixed_buffered_n(SvNV(nv), SvUV(prec), result);
 
-  ST(0) = sv_2mortal(newSVpv(result, 0));
+  ST(0) = MORTALIZED_PV(result);        /* defined in math_ryu_include.h */
   ST(1) = sv_2mortal(newSViv(n));
   Safefree(result);
   XSRETURN(2);
@@ -98,7 +95,7 @@ void RYU_d2exp_buffered_n(pTHX_ SV * nv, SV * exponent) {
 
   n = d2exp_buffered_n(SvNV(nv), SvUV(exponent), result);
 
-  ST(0) = sv_2mortal(newSVpv(result, 0));
+  ST(0) = MORTALIZED_PV(result);        /* defined in math_ryu_include.h */
   ST(1) = sv_2mortal(newSViv(n));
   Safefree(result);
   XSRETURN(2);
@@ -119,6 +116,10 @@ SV * RYU_d2exp_buffered(pTHX_ SV * nv, SV * exponent) {
 
 SV * RYU_d2exp(pTHX_ SV * nv, SV * exponent) {
   return newSVpv(d2exp(SvNV(nv), SvUV(exponent)), 0);
+}
+
+int _sis_perl_version(void) {
+    return SIS_PERL_VERSION;
 }
 
 /* End d2exp */
@@ -224,4 +225,8 @@ RYU_d2exp (nv, exponent)
 CODE:
   RETVAL = RYU_d2exp (aTHX_ nv, exponent);
 OUTPUT:  RETVAL
+
+int
+_sis_perl_version ()
+
 
