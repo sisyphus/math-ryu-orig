@@ -101,6 +101,8 @@ my $v_check = $];
 $v_check =~ s/\.//;
 
 cmp_ok($v, 'eq', $v_check);
+cmp_ok($Math::Ryu::VERSION, 'eq', '0.01', "\$VERSION stringifies as expected");
+cmp_ok($Math::Ryu::VERSION, '==',  0.01,  "\$VERSION numifies as expected");
 
 done_testing();
 
