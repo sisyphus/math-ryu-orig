@@ -8,7 +8,7 @@ require Exporter;
 require DynaLoader;
 
 our $VERSION = '0.01';
-$VERSION = eval $VERSION;
+#$VERSION = eval $VERSION;
 DynaLoader::bootstrap Math::Ryu $VERSION;
 
 @Math::Ryu::EXPORT = ();
