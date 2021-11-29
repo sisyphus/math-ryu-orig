@@ -96,6 +96,11 @@ for(0 .. @in - 1) {
 ######################
 }
 
+my $v = Math::Ryu::_sis_perl_version;
+my $v_check = $];
+$v_check =~ s/\.//;
+
+cmp_ok($v, 'eq', $v_check);
 
 done_testing();
 
