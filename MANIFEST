@@ -2,11 +2,11 @@ MANIFEST
 Changes
 have_uint128_t.in
 Makefile.PL
+math_ryu_include.h
 README
 Ryu.pm
 Ryu.pod
 Ryu.xs
-math_ryu_include.h
 t/_1basic.t
 t/mpfr_checks.t
 
