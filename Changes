@@ -1,3 +1,4 @@
+0.03
 
 0.02
      - Fix big in t/mpfr_checks.t (No allowance was being made for the possibility
