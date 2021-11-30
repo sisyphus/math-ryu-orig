@@ -8,6 +8,12 @@ eval {require Math::MPFR;};
 if($@) {
   plan skip_all => 'could not load Math::MPFR';
 }
+elsif($Math::MPFR::VERSION < 4.07) {
+  plan skip_all => "need at least Math-MPFR-4.07, have Math-MPFR-$Math::MPFR::VERSION";
+}
+elsif(Math::MPFR::MPFR_VERSION() <= 196869) {
+  plan skip_all => 'need at least mpfr-3.1.6, have mpfr-' . Math::MPFR::MPFR_VERSION_STRING();
+}
 
 my $count = 0;
 
