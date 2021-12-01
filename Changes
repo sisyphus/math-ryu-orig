@@ -1,4 +1,5 @@
 0.03
+     - Ensure that Newxz() is defined
 
 0.02
      - Fix big in t/mpfr_checks.t (No allowance was being made for the possibility
