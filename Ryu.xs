@@ -14,6 +14,15 @@
 #include "ryu_headers/ryu.h"
 #include "math_ryu_include.h"
 
+/* s2d */
+
+NV RYU_s2d(char * buffer) {
+  NV nv;
+  s2d(buffer, &nv);
+  return nv;
+}
+
+/* End s2d */
 /* d2s */
 
 void RYU_d2s_buffered_n(pTHX_ SV * nv) {
@@ -129,6 +138,10 @@ MODULE = Math::Ryu  PACKAGE = Math::Ryu  PREFIX = RYU_
 
 PROTOTYPES: DISABLE
 
+
+NV
+RYU_s2d (buffer)
+	char *	buffer
 
 void
 RYU_d2s_buffered_n (nv)
