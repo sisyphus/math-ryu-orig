@@ -93,6 +93,14 @@ for(0 .. @in - 1) {
 ## d2exp_buffered() ##
   cmp_ok(d2exp_buffered($in[$_], 55), 'eq', d2exp($in[$_], 55), "d2exp_buffered($in[$_], 55) returns same value as d2exp()");
 
+###########
+###########
+
+## s2d() ##
+  cmp_ok(s2d('1E-1'), '==', 0.1, "s2d('1E-1') returns 0.1");
+  cmp_ok(s2d('1.3999999999999999E-1'), '==', 1.4 / 10, "s2d('1.3999999999999999e-1') returns 1.4/10");
+  cmp_ok(s2d('0.0000008'), '==', 0.0000008, "s2d('0.0000008') returns 0.0000008");
+
 ######################
 }
 
