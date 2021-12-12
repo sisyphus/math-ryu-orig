@@ -9,7 +9,8 @@ if($Config::Config{nvsize} > 8) {
   exit 0;
 }
 
-my $mycc = '';
+my $mycc    = '';
+my $defines = '';
 
 if(@ARGV) {
   for my $arg(@ARGV) {
@@ -34,6 +35,7 @@ my %options = (
 
   NAME => 'Math::Ryu',
   PREREQ_PM    => { 'Test::More' => '0.88', },
+  DEFINE       => $defines,
   LICENSE      => 'perl',
   VERSION_FROM => 'Ryu.pm',
   clean        => { FILES => '*.exe' },
