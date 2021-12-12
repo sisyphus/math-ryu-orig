@@ -11,8 +11,9 @@
 #include "perl.h"
 #include "XSUB.h"
 
-#include "ryu_headers/ryu.h"
 #include "math_ryu_include.h"
+#include "ryu_headers/ryu.h"
+#include "ryu_headers/ryu_parse.h"
 
 /* s2d */
 
