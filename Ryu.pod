@@ -2,12 +2,14 @@
 
 =head1 NAME
 
-Math::Ryu - perl interface to the ryu C library.
+Math::Ryu - perl interface to Ryu (float-to-string conversion).
 
 =head1 DEPENDENCIES
 
-   This module includes the Ryu C library, which is available from github:
-   $ git clone https://github.com/ulfjack/ryu.git /home/me/ryu_source
+   This module uses the Ryu C implementation,  which is included with
+   this module's source. It is therefore unnecessary to download that
+   Ryu code - but, should you wish to grab it, it's available at:
+   https://github.com/ulfjack/ryu/tree/master/ryu
 
 =head1 DESCRIPTION
 
@@ -16,6 +18,8 @@ Math::Ryu - perl interface to the ryu C library.
 
    NOTE:
    NVs whose size is greater than 8 bytes are not currently catered for.
+   It is also currently required that the C compiler used to build this
+   module has the __uint128_t data type.
 
 =head1 SYNOPSIS
 
@@ -60,7 +64,6 @@ Math::Ryu - perl interface to the ryu C library.
    $str = d2exp($nv, $digits);
     $str is a $digits-decimal floating point representation of $nv.
     For example, d2exp(1 / 10000, 6) returns '1.000000e-04'.
-
 
    $str = d2s_buffered($nv);                       # Not very useful
     Returns the same as d2s($nv).
