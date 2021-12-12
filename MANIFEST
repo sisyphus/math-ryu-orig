@@ -9,6 +9,7 @@ Ryu.pod
 Ryu.xs
 t/_1basic.t
 t/mpfr_checks.t
+t/round_trip.t
 
 # The following are all ryu source files
 # from https://github.com/ulfjack/ryu/tree/master/ryu.
