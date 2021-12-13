@@ -36,9 +36,9 @@
 #include <inttypes.h>
 #include <stdio.h>
 static char* s(uint128_t v) {
-  int len = decimalLength(v);
+  int i, len = decimalLength(v);
   char* b = (char*) malloc((len + 1) * sizeof(char));
-  for (int i = 0; i < len; i++) {
+  for (i = 0; i < len; i++) {
     const uint32_t c = (uint32_t) (v % 10);
     v /= 10;
     b[len - 1 - i] = (char) ('0' + c);
@@ -87,8 +87,9 @@ struct floating_decimal_128 long_double_to_fd128(long double d) {
 struct floating_decimal_128 generic_binary_to_decimal(
     const uint128_t bits, const uint32_t mantissaBits, const uint32_t exponentBits, const bool explicitLeadingBit) {
 #ifdef RYU_DEBUG
+  int32_t bit;
   printf("IN=");
-  for (int32_t bit = 127; bit >= 0; --bit) {
+  for (bit = 127; bit >= 0; --bit) {
     printf("%u", (uint32_t) ((bits >> bit) & 1));
   }
   printf("\n");
