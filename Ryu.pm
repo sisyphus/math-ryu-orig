@@ -13,13 +13,15 @@ DynaLoader::bootstrap Math::Ryu $VERSION;
 
 @Math::Ryu::EXPORT = ();
 @Math::Ryu::EXPORT_OK = qw(
-    d2s_buffered_n d2s_buffered d2s d2fixed_buffered_n d2fixed_buffered
-    d2fixed d2fixed d2exp_buffered_n d2exp_buffered d2exp s2d
+    d2s s2d
+    d2s_buffered_n d2s_buffered d2fixed_buffered_n d2fixed_buffered
+    d2fixed d2fixed d2exp_buffered_n d2exp_buffered d2exp
     );
 
 %Math::Ryu::EXPORT_TAGS = (all => [qw(
-    d2s_buffered_n d2s_buffered d2s d2fixed_buffered_n d2fixed_buffered
-    d2fixed d2fixed d2exp_buffered_n d2exp_buffered d2exp s2d
+    d2s s2d
+    d2s_buffered_n d2s_buffered d2fixed_buffered_n d2fixed_buffered
+    d2fixed d2fixed d2exp_buffered_n d2exp_buffered d2exp
     )]);
 
 sub dl_load_flags {0} # Prevent DynaLoader from complaining and croaking
