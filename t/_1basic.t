@@ -112,5 +112,8 @@ cmp_ok($v, 'eq', $v_check);
 cmp_ok($Math::Ryu::VERSION, 'eq', '0.03', "\$VERSION stringifies as expected");
 cmp_ok($Math::Ryu::VERSION, '==',  0.03,  "\$VERSION numifies as expected");
 
+require Math::Ryu::Debug;
+cmp_ok($Math::Ryu::VERSION, 'eq', $Math::Ryu::Debug::VERSION, "Debug and non-Debug version numbers match");
+
 done_testing();
 
