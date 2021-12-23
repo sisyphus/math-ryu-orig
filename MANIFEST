@@ -27,11 +27,9 @@ Debug/t/_1basic.t
 
 d2fixed.c
 d2s.c
-generic_128.c
 s2d.c
 Debug/d2fixed.c
 Debug/d2s.c
-Debug/generic_128.c
 Debug/s2d.c
 ryu_headers/common.h
 ryu_headers/d2fixed_full_table.h
@@ -41,6 +39,5 @@ ryu_headers/d2s_small_table.h
 ryu_headers/digit_table.h
 ryu_headers/generic_128.h
 ryu_headers/ryu.h
-ryu_headers/ryu_generic_128.h
 ryu_headers/ryu_parse.h
 
