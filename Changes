@@ -1,4 +1,5 @@
-0.05
+0.05 - Add n2s function - same as d2s except that n2s also does what you mean
+       when its given argument is an integer (IV/UV) or a string (PV).
 
 0.04
      - Add _has_uint128() function (in both d2fixed.c files and both .xs files)
