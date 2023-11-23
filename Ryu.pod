@@ -129,7 +129,7 @@ Math::Ryu - perl interface to Ryu (float-to-string conversion).
     The Boost Software License can be found at:
     https://www.boost.org/LICENSE_1_0.txt
 
-    This perl module is Copyright 2021 Sisyphus
+    This perl module is Copyright 2021-3 Sisyphus
 
 =head1 AUTHOR
 
