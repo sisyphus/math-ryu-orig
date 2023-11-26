@@ -5,6 +5,7 @@
 use strict;
 use warnings;
 use Math::Ryu qw(:all);
+use Config;
 
 use Test::More;
 
@@ -43,3 +44,16 @@ sub random_digits {
     $ret .= int(rand(10)) for 1 .. 10;
     return $ret;
 }
+
+$s = '123456789' x 10;
+cmp_ok(lc(n2s($s)), 'eq', '1.2345678912345679e89', 'n2s converts long string to 17-digit double');
+
+$s = '123456789' x 2;
+
+if($Config{ivsize} == 4) {
+  cmp_ok(lc(n2s($s)), 'eq', '1.2345678912345678e17', 'n2s converts "123456789123456789" to "1.2345678912345678e17"');
+}
+else {
+  cmp_ok(lc(n2s($s)), 'eq', $s, 'n2s leaves "123456789123456789" unchanged');
+}
+
