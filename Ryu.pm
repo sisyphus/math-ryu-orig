@@ -59,6 +59,7 @@ my @tagged = qw(
   d2s_buffered_n d2s_buffered d2fixed_buffered_n d2fixed_buffered
   d2fixed d2fixed d2exp_buffered_n d2exp_buffered d2exp
   n2s
+  fmtjs fmtpy
   );
 
 @Math::Ryu::EXPORT = ();
@@ -85,6 +86,118 @@ sub n2s {
   # to an NV.
   return "$arg" if _SvIOK($arg + 0);
   return d2s($arg);
+}
+
+sub fmtjs {
+  # Format the string returned by d2s according to the way
+  # that JavaScript does it.
+
+  my $sinput = shift;
+  return $sinput unless $sinput =~ /E|N/i;
+
+  return $sinput if $sinput =~ /inf|nan/i;
+  return '0' if($sinput =~ /^\-?0E0$/);
+
+  my ($man, $exp) = split /E/i, $sinput;
+
+  my $sign = '';
+  # Remove the leading '-' and reinstate it later.
+  $sign = '-' if $man =~ s/^\-//;
+
+  return $sign . _fmt($man, $exp, 'js');
+}
+
+sub fmtpy {
+  # Format the string returned by d2s according to the way
+  # that python3 does it.
+
+  my $sinput = shift;
+  return $sinput unless $sinput =~ /E|N/i;
+
+  if($sinput =~ /inf|nan/i) {
+    $sinput =~ s/inity?//i;
+    return lc($sinput);
+  }
+  if($sinput =~ /^\-?0E0$/) {
+    $sinput =~ s/E/./;
+    return $sinput;
+  }
+
+  my ($man, $exp) = split /E/i, $sinput;
+
+  my $sign = '';
+  # Remove the leading '-' and reinstate it later.
+  $sign = '-' if $man =~ s/^\-//;
+
+  return $sign . _fmt($man, $exp, 'py');
+}
+
+sub _fmt {
+
+  my ($man, $exp, $type, $ret) = (shift, shift, shift, 0);
+  return $man if !$exp;
+
+  # Note that $man, as called by fmtjs() and fmtpy()
+  # has no leading '-' or '+' sign.
+
+  if($man =~ /\./) {
+    my @parts = split /\./, $man;
+    $exp -= length($parts[1]);
+    $man = $parts[0] . $parts[1]
+  }
+
+  # $man is now an integer and "${man}e${exp}" represents
+  # the absolute value of the original string.
+
+  #my $critical = $exp; # Formatting is based around the value of $exp;
+  my $man_len = length($man);
+
+  if($exp < -3) {
+    return '0.' . $man if !($man_len + $exp);
+    # Present scientific notation MANeEXP
+    #print "DEBUG: BLOCK 1 $man $exp\n";
+    if(abs($exp) < $man_len - 1) {
+      substr($man, $exp, 0, '.');
+      return $man;
+    }
+    #if($man_len > 1) {
+    elsif($man_len > 1) {
+      # insert decimal point
+      substr($man, 1, 0, '.');
+      $exp += $man_len - 1;
+    }
+    return $man . sprintf "e%03d", $exp;
+  }
+
+  if($exp <= 0) {
+    # Show no exponent - just M
+    #print "DEBUG: BLOCK 2 $man $exp\n";
+    if(!$exp) {$man .= '.0'}
+    else {substr($man, $exp, 0, '.')}
+    #$man =~ s/^\./0./;
+    return $man;
+  }
+
+  if($exp < 17) {
+    # Present scientific notation MANeEXP
+    # insert decimal point.
+    #print "DEBUG: BLOCK 3 $man $exp\n";
+    my $zero_pad = 0;
+    $zero_pad = $exp if $exp + $man_len < 17;
+    if($zero_pad > 0) {
+     return $man . ('0' x $zero_pad) . '.0';
+    }
+    $exp += $man_len - 1;
+    substr($man, 1, 0, '.');
+  }
+  elsif($man_len != 1) {
+    $exp += $man_len - 1;
+    substr($man, 1, 0, '.');
+    #print "DEBUG: BLOCK 4\n";
+  }
+
+  #print "DEBUG: BLOCK 5\n";
+  return $man . 'e+' . $exp;
 }
 
 1;
