@@ -108,11 +108,10 @@ Math::Ryu - perl interface to Ryu (float-to-string conversion).
     $str is the same as returned by d2exp($nv, $digits).
     $len is length($str).
 
-  $str = fmtjs($s);
   $str = fmtpy($s);
     The argument $s is a string as returned by d2(s) or n2s().
     We reformat this string to be the same as the string that
-    JavaScript (resp. python3) produces and return it as $str.
+    python3 produces and return it as $str.
 
 =head1 TODO
 

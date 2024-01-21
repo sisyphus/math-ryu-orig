@@ -59,7 +59,7 @@ my @tagged = qw(
   d2s_buffered_n d2s_buffered d2fixed_buffered_n d2fixed_buffered
   d2fixed d2fixed d2exp_buffered_n d2exp_buffered d2exp
   n2s
-  fmtjs fmtpy
+  fmtpy
   );
 
 @Math::Ryu::EXPORT = ();
@@ -88,24 +88,24 @@ sub n2s {
   return d2s($arg);
 }
 
-sub fmtjs {
-  # Format the string returned by d2s according to the way
-  # that JavaScript does it.
-
-  my $sinput = shift;
-  return $sinput unless $sinput =~ /E|N/i;
-
-  return $sinput if $sinput =~ /inf|nan/i;
-  return '0' if($sinput =~ /^\-?0E0$/);
-
-  my ($man, $exp) = split /E/i, $sinput;
-
-  my $sign = '';
-  # Remove the leading '-' and reinstate it later.
-  $sign = '-' if $man =~ s/^\-//;
-
-  return $sign . _fmt($man, $exp, 'js');
-}
+#sub fmtjs {
+#  # Format the string returned by d2s according to the way
+#   # that JavaScript does it.
+#
+#  my $sinput = shift;
+#  return $sinput unless $sinput =~ /E|N/i;
+#
+#  return $sinput if $sinput =~ /inf|nan/i;
+#  return '0' if($sinput =~ /^\-?0E0$/);
+#
+#  my ($man, $exp) = split /E/i, $sinput;
+#
+#  my $sign = '';
+#  # Remove the leading '-' and reinstate it later.
+#  $sign = '-' if $man =~ s/^\-//;
+#
+#  return $sign . _fmt($man, $exp, 'js');
+#}
 
 sub fmtpy {
   # Format the string returned by d2s according to the way
@@ -129,12 +129,12 @@ sub fmtpy {
   # Remove the leading '-' and reinstate it later.
   $sign = '-' if $man =~ s/^\-//;
 
-  return $sign . _fmt($man, $exp, 'py');
+  return $sign . _fmt($man, $exp);
 }
 
 sub _fmt {
 
-  my ($man, $exp, $type, $ret) = (shift, shift, shift, 0);
+  my ($man, $exp, $ret) = (shift, shift, 0);
   return $man if !$exp;
 
   # Note that $man, as called by fmtjs() and fmtpy()
@@ -153,14 +153,17 @@ sub _fmt {
   my $man_len = length($man);
 
   if($exp < -3) {
-    return '0.' . $man if !($man_len + $exp);
-    # Present scientific notation MANeEXP
     #print "DEBUG: BLOCK 1 $man $exp\n";
+    my $leading_zeros = $man_len + $exp;
+    if($leading_zeros <= 0 && $leading_zeros >= -3) {
+      return '0.' . ('0' x abs($leading_zeros)) . $man;
+    }
+
+    # Present scientific notation MANeEXP
     if(abs($exp) < $man_len - 1) {
       substr($man, $exp, 0, '.');
       return $man;
     }
-    #if($man_len > 1) {
     elsif($man_len > 1) {
       # insert decimal point
       substr($man, 1, 0, '.');
