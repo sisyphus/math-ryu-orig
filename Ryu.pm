@@ -177,7 +177,7 @@ sub _fmt {
     #print "DEBUG: BLOCK 2 $man $exp\n";
     if(!$exp) {$man .= '.0'}
     else {substr($man, $exp, 0, '.')}
-    #$man =~ s/^\./0./;
+    $man =~ s/^\./0./;
     return $man;
   }
 

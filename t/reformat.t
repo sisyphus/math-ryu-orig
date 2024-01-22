@@ -120,6 +120,10 @@ if($mpfr) {
   cmp_ok(fmtpy(d2s(1e23)), 'eq', '1e+23', "Math::MPFR test 16: ok");
 }
 
+for(0.1, 0.12, 0.123) {
+  cmp_ok(fmtpy(d2s($_)), 'eq', $_, "js: $_ renders as expected");
+}
+
 if($mpfr) {
   for my $iteration (1..10) {
     my $sign = $iteration & 1 ? '-' : '';
@@ -129,6 +133,12 @@ if($mpfr) {
       my $num = $rand + 0;
       cmp_ok(fmtpy(d2s($num)), 'eq', Math::MPFR::nvtoa($num), "fmtpy() format agrees with nvtoa(): " . sprintf("%.17g", $num));
     }
+  }
+
+  for my $num(0.1, 0.12, 0.123, 0.1234, 0.12345, 0.123456, 0.1234567, 0.12345678, 0.123456789, 0.1234567890, 0.12345678901, 0.123456789012,
+             0.1234567890123, 0.12345678901234, 0.123456789012345, 0.1234567890123456, 0.12345678901234567, 0.123456789012345678,
+             0.1234567890123456789, 0.12345678901234567894) {
+    cmp_ok(fmtpy(d2s($num)), 'eq', Math::MPFR::nvtoa($num), "fmtpy() format agrees with nvtoa(): " . sprintf("%.17g", $num));
   }
 
 }
