@@ -28,13 +28,17 @@ Math::Ryu - perl interface to Ryu (float-to-string conversion).
 
    $str = d2s(1.4 / 10);
    print $str;           # 1.3999999999999999E-1
+   print fmtpy($str);    # 0.13999999999999999
 
    $str = d2s(sqrt 2);
    print $str;           # 1.4142135623730951E0
+   print fmtpy($str);    # 1.4142135623730951
 
    # Also do the reverse of s2d()
    my $d = s2d('1E-1');
-   printf "%.17g\n", $d; # 0.10000000000000001
+   printf "%.17g\n", $d;   # 0.10000000000000001
+   print  d2s($d);         # 1E-1
+   print  fmtpy(d2s($d));  # 0.1
 
 
 =head1 FUNCTIONS
