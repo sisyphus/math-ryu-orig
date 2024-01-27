@@ -12,7 +12,7 @@ use Math::Ryu::Debug; # Don't import anything as function names will clash with 
 if(Math::Ryu::Debug::_has_uint128()) { warn "DEBUG HAS_UINT128: 1\n" }
 else { warn "DEBUG HAS_UINT128: 0\n" }
 
-cmp_ok($Math::Ryu::Debug::VERSION, '==', 0.07, "version is as expected");
+cmp_ok($Math::Ryu::Debug::VERSION, '==', 0.08, "version is as expected");
 cmp_ok($Math::Ryu::Debug::VERSION, '==', $Math::Ryu::VERSION, "version matches Math::Ryu");
 
 my $s1 = d2s(1.4 / 10);
