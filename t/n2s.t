@@ -46,12 +46,19 @@ sub random_digits {
 }
 
 $s = '123456789' x 10;
-cmp_ok(lc(n2s($s)), 'eq', '1.2345678912345679e89', 'n2s converts long string to 17-digit double');
+
+if($] >= 5.03 || sprintf("%.17g", $s + 0) eq '1.2345678912345679e+89') {
+  cmp_ok(lc(n2s($s)), 'eq', '1.2345678912345679e89', 'n2s converts long string to 17-digit double');
+}
+else { warn "skipping 'n2s converts long string to 17-digit double' test as perl assigns the value incorrectly\n" }
 
 $s = '123456789' x 2;
 
 if($Config{ivsize} == 4) {
-  cmp_ok(lc(n2s($s)), 'eq', '1.2345678912345678e17', 'n2s converts "123456789123456789" to "1.2345678912345678e17"');
+  if($] >= 5.03 || sprintf("%.17g", $s + 0) eq '1.2345678912345679e+89') {
+    cmp_ok(lc(n2s($s)), 'eq', '1.2345678912345678e17', 'n2s converts "123456789123456789" to "1.2345678912345678e17"');
+  }
+  else { warn "skipping 'n2s converts \"123456789123456789\" to \"1.2345678912345678e17\"' test as perl assigns the value incorrectly\n" }
 }
 else {
   cmp_ok(lc(n2s($s)), 'eq', $s, 'n2s leaves "123456789123456789" unchanged');

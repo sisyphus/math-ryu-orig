@@ -91,19 +91,28 @@ if($mpfr) {
   cmp_ok(fmtpy(d2s(1.1234567890123456e25)), 'eq', '1.1234567890123457e+25', "Math::MPFR test 12: ok");
 }
 
-cmp_ok(fmtpy(d2s(9e125)), 'eq', '9e+125', 'py: 9e125 ok');
+if($] >= 5.03 || sprintf("%.17g", 9e+125) eq '9.0000000000000001e+125') {
+  cmp_ok(fmtpy(d2s(9e125)), 'eq', '9e+125', 'py: 9e125 ok');
+}
+else { warn "skipping 'py: 9e125 ok' test because this broken perl assigns the value incorrectly" }
 
 if($mpfr) {
   cmp_ok(fmtpy(d2s(9e125)), 'eq', '9e+125', "Math::MPFR test 13: ok");
 }
 
-cmp_ok(fmtpy(d2s(9.123e125)), 'eq', '9.123e+125', 'py: 9.123e125 ok');
+if($] >= 5.03 || sprintf("%.17g", 9.123e+125) eq '9.1230000000000006e+125') {
+  cmp_ok(fmtpy(d2s(9.123e125)), 'eq', '9.123e+125', 'py: 9.123e125 ok');
+}
+else { warn "skipping 'py: 9.123e125 ok' test because this broken perl assigns the value incorrectly" }
 
 if($mpfr) {
   cmp_ok(fmtpy(d2s(9.123e125)), 'eq', '9.123e+125', "Math::MPFR test 14: ok");
 }
 
-cmp_ok(fmtpy(d2s(91144e125)), 'eq', '9.1144e+129', 'py: 91144e125 ok');
+if($] >= 5.03 || sprintf("%.17g", 9.1144e+125) eq '9.1144000000000005e+125') {
+  cmp_ok(fmtpy(d2s(91144e125)), 'eq', '9.1144e+129', 'py: 91144e125 ok');
+}
+else { warn "skipping 'py: 9.1144e125 ok' test because this broken perl assigns the value incorrectly" }
 
 if($mpfr) {
   cmp_ok(fmtpy(d2s(91144e125)), 'eq', '9.1144e+129', "Math::MPFR test 15: ok");
